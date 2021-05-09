@@ -9,11 +9,6 @@ class Menu extends Component {
     this.state = {
       selectedDish: null,
     };
-    console.log("component ctor");
-  }
-
-  componentDidMount() {
-    console.log("component DidMount");
   }
 
   onDishSelect(dish) {
@@ -26,7 +21,6 @@ class Menu extends Component {
         <div key={dish.id} className="col-12 col-md-5 m-1">
           <Card onClick={() => this.onDishSelect(dish)}>
             <CardImg width="100%" src={dish.image} alt={dish.name} />
-
             <CardImgOverlay body className="ml-5">
               <CardTitle>{dish.name}</CardTitle>
             </CardImgOverlay>
@@ -34,11 +28,10 @@ class Menu extends Component {
         </div>
       );
     });
-    console.log("component rendering");
     return (
       <div className="container">
         <div className="row">{menu}</div>
-          <Dishdetail dish={this.state.selectedDish}></Dishdetail>
+        <Dishdetail dish={this.state.selectedDish}></Dishdetail>
       </div>
     );
   }

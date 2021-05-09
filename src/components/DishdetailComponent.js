@@ -2,16 +2,6 @@ import React, { Component } from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
 class Dishdetail extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-    console.log("component ctor");
-  }
-
-  componentDidMount() {
-    console.log("component DidMount");
-  }
 
   renderDish(dish) {
     if (dish != null) {
@@ -31,30 +21,40 @@ class Dishdetail extends Component {
 
   renderComments(comments) {
     if (comments != null) {
-      return (
-        <Card>
-          {/* <CardImg width="100%" src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody> */}
-        </Card>
-      );
+      const commentList = comments.map((comment) => {
+        return (
+          <li key={comment.id}>
+            <p className="text-left">{comment.comment}</p>
+            <p className="text-left">
+              -- {comment.author}, {comment.date}
+            </p>
+          </li>
+        );
+      });
+      return <ul class="list-unstyled">{commentList}</ul>;
     } else {
       return <div></div>;
     }
   }
 
   render() {
-    let dish = this.props.dish;
-    let dishCard = this.renderDish(dish);
-    //let dishComment = this.renderComments(dish.comments);
+    if (this.props.dish != null) {
+      let dish = this.props.dish;
+      let dishCard = this.renderDish(dish);
+      let dishComment = this.renderComments(dish.comments);
 
-    console.log("component rendering");
-    return <div className="row">
-      <div className="col-12 col-md-5 m-1">{dishCard}</div>
-      <div className="col-12 col-md-5 m-1">{/*dishComment*/}</div>
-    </div>;
+      return (
+        <div className="row">
+          <div className="col-12 col-md-5 m-1">{dishCard}</div>
+          <div className="col-12 col-md-5 m-1">
+            <h4>Comments</h4>
+            {dishComment}
+          </div>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 
