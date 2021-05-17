@@ -42,7 +42,6 @@ function RenderComments({ comments }) {
 
 const Dishdetail = (props) => {
   if (props.dish != null) {
-    let dish = props.dish;
 
     return (
       <div className="container">
